@@ -156,7 +156,7 @@ public class GraphsAutomation extends TestConfig {
      *
      * @author : Prasanna
      */
-    @Test(groups = {"smokeTest"})
+    @Test(groups = {"regressionTest"})
     public void testShipmentsDocURLsDocProGraph() {//prasanna
         test = extent.createTest("Verifying Shipments Documents Test");
         WebDriverWait wait = new WebDriverWait(driver, 15);

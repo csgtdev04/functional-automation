@@ -19,6 +19,7 @@
             <class name = "com.generic.functional.automation.ui.tests.home.HelpButtonTest" />
             <class name = "com.generic.functional.automation.ui.tests.home.QueriesAutomation" />
             <class name = "com.generic.functional.automation.ui.tests.home.SortingAutomation" />
+            <class name = "com.generic.functional.automation.ui.tests.login.LoginLogoutAutomation" />
         </classes>
     </test>
 

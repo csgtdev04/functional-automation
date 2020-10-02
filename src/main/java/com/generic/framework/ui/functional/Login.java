@@ -46,8 +46,8 @@ public class Login {
     WebElement password = driver.findElement(By.xpath("/html/body/div/div/div/main/div/main/div/form/div[2]/div/input"));
     //highlightHelper.highLightElement(driver, password);
 
-    driver.findElement(By.id("password")).sendKeys("Design_20");
-    test.createNode("LoginPage Password =\"Design_20\" Typed ");
+    driver.findElement(By.id("password")).sendKeys("A$data@135");
+    test.createNode("LoginPage Password =\"A$data@135\" Typed ");
     driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
     //driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span")).click();
     WebElement span = driver.findElement(By.xpath("//div[@id='gatsby-focus-wrapper']/div/main/div/main/div/form/button/span"));
