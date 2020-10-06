@@ -1,0 +1,5 @@
+list all charges
+list all charges where carrier id is fedex
+list all charges where charge type is Disk and freight charges amount > 100
+list all charges where carrier id is ups frieght
+list all charges whose carrier id equals ups frieght

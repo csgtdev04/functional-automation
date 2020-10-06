@@ -1,6 +1,7 @@
 package com.generic.functional.automation.ui.tests.home;
 
 import com.aventstack.extentreports.Status;
+import com.generic.framework.ui.helper.FileHelper;
 import com.generic.framework.ui.helper.HighlightHelper;
 import com.generic.framework.ui.helper.QueryChecker;
 import com.generic.functional.automation.ui.tests.common.TestConfig;
@@ -16,6 +17,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -23,6 +27,7 @@ public class QueriesAutomation extends TestConfig {
 
     QueryChecker queryChecker;
     HighlightHelper highlightHelper;
+    FileHelper fileHelper;
     final int time_to_wait = 30;
     WebDriverWait wait;
 
@@ -31,7 +36,7 @@ public class QueriesAutomation extends TestConfig {
         wait = new WebDriverWait(driver, 15);
         queryChecker = new QueryChecker();
         highlightHelper = new HighlightHelper();
-
+        fileHelper = new FileHelper();
     }
 
     /**
@@ -87,6 +92,34 @@ public class QueriesAutomation extends TestConfig {
             //query 4
             queryChecker.runSearchBubbleQuery(driver, "list all charges where carrier id is ups frieght", test);
             test.createNode("list all charges where carrier id is ups frieght verified successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        test.createNode("Verified Freight Charge Queries Successfully!");
+    }
+
+    /**
+     * testFreightChargeQueriesViaFile is used to run some queries in search bubble
+     *
+     * @author Sai Tanuj
+     */
+    @Test (groups = {"smokeTest"})
+    public void testFreightChargeQueriesViaFile() throws Exception {
+        //Setup
+        test = extent.createTest("Verify Freight Charges Queries via Query File Input");
+        driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
+        String myPath = System.getProperty("user.dir");
+        String filePath = myPath + "/src/test/java/com/generic/functional/automation/ui/tests/home/FreightChargeQueries.txt";
+        List<String> queries = fileHelper.retrieveArrayList(filePath);
+        try {
+            login.doLogin(test);
+            test.log(Status.INFO, "Clicking on Search Bar");
+            //For loop obtains queries from FreightChargeQueries.txt
+            for(int i = 0; i < queries.size(); i++) {
+                System.out.println("\n" + queries.get(i) + "\n");
+                queryChecker.runSearchBubbleQuery(driver, queries.get(i), test);
+                test.createNode(queries.get(i) + "verified successfully");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
