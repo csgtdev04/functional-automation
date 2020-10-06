@@ -67,12 +67,12 @@ public class QueriesAutomation extends TestConfig {
     }
 
     /**
-     * testFreightChareQueries is used to run some queries in search bubble
+     * testFreightChargeQueries is used to run some queries in search bubble
      *
      * @author Haritha
      */
     @Test (groups = {"smokeTest"})
-    public void testFreightChargeQueries() throws Exception {
+    public void testFreightChargeQueries() {
         //Setup
 
         test = extent.createTest("Verify Freight Charges Queries");
@@ -102,17 +102,18 @@ public class QueriesAutomation extends TestConfig {
     }
 
     /**
-     * testFreightChargeQueriesViaFile is used to run some queries in search bubble
+     * testFreightChargeQueriesViaFile is used to run freight charge queries in search bubble read from a txt file
      *
      * @author Sai Tanuj
      */
     @Test (groups = {"smokeTest"})
-    public void testFreightChargeQueriesViaFile() throws Exception {
+    public void testFreightChargeQueriesViaFile() {
         //Setup
         test = extent.createTest("Verify Freight Charges Queries via Query File Input");
         driver.manage().timeouts().implicitlyWait(time_to_wait, TimeUnit.SECONDS);
-        String myPath = System.getProperty("user.dir");
-        String filePath = myPath + "/src/test/java/com/generic/functional/automation/ui/tests/home/FreightChargeQueries.txt";
+        String myPersonalPath = System.getProperty("user.dir");
+        //The .txt file would be different for other test cases, but everything else would be the same (unless you work in Data Studio)
+        String filePath = myPersonalPath + "/src/test/java/com/generic/functional/automation/ui/tests/home/FreightChargeQueries.txt";
         List<String> queries = fileHelper.retrieveArrayList(filePath);
         try {
             login.doLogin(test);
@@ -121,7 +122,7 @@ public class QueriesAutomation extends TestConfig {
             for(int i = 0; i < queries.size(); i++) {
                 System.out.println("\n" + queries.get(i) + "\n");
                 queryChecker.runSearchBubbleQuery(driver, queries.get(i), test);
-                test.createNode(queries.get(i) + "verified successfully");
+                test.createNode(queries.get(i) + " verified successfully");
             }
         } catch (Exception e) {
             e.printStackTrace();
